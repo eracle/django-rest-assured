@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
 
-with open('requirements.txt') as fp:
-    install_requires = fp.read()
 
 setup(
     name='django-rest-assured',
@@ -12,7 +10,7 @@ setup(
     author_email='maggotfish@gmail.com',
     license='BSD',
     packages=find_packages(),
-    install_requires=install_requires,
+    install_requires=["django>=1.6", "djangorestframework>=2.4.3"],
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',

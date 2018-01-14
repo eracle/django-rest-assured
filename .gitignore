@@ -55,8 +55,5 @@ docs/_build/
 target/
 
 .idea/
-
-test.sh
-
-# ignoring virtualenvironment
 .venv/
+test.sh
