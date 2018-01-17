@@ -1,14 +1,15 @@
 from django.test import TestCase
 
 from rest_assured.testcases import ListAPITestCaseMixin
-from tests import mocks
+from tests.app.factories import StuffFactory
+from tests.mocking.test_base import MockTestCase
 
 
 class TestListTestCase(TestCase):
     def get_case(self, **kwargs):
-        class MockListTestCase(ListAPITestCaseMixin, mocks.MockTestCase):
+        class MockListTestCase(ListAPITestCaseMixin, MockTestCase):
             base_name = 'stuff'
-            factory_class = mocks.StuffFactory
+            factory_class = StuffFactory
 
         self.case_class = MockListTestCase
 

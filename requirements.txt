@@ -1,3 +1,4 @@
 Django
 djangorestframework
 sphinx
+factory-boy==2.9.2

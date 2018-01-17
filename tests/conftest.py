@@ -20,6 +20,6 @@ def pytest_configure():
             'django.contrib.sessions',
 
             'rest_framework',
-            'tests',
+            'tests.app',
         ]
     )

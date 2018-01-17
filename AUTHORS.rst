@@ -9,3 +9,4 @@ With contributions by:
 
 Tymur Maryokhin @maryokhin
 Yuri Prezument @yprez
+Antonio Ercole De Luca @eracle

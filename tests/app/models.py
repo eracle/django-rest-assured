@@ -7,21 +7,21 @@ class Stuff(models.Model):
     answer = models.PositiveSmallIntegerField(null=True, blank=True)
 
     class Meta:
-        app_label = 'tests'
+        app_label = 'app'
 
     def get_absolute_url(self):
         return reverse('stuff-detail', [self.pk])
 
 
 class RelatedStuff(models.Model):
-    thing = models.ForeignKey(Stuff)
+    thing = models.ForeignKey(Stuff, null=True, blank=True)
 
     class Meta:
-        app_label = 'tests'
+        app_label = 'app'
 
 
 class ManyRelatedStuff(models.Model):
     stuff = models.ManyToManyField(Stuff)
 
     class Meta:
-        app_label = 'tests'
+        app_label = 'app'

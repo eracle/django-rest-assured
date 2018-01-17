@@ -1,16 +1,18 @@
 from django.test import TestCase
-
 from rest_framework.reverse import reverse
+
+import tests.app
 from rest_assured.testcases import UpdateAPITestCaseMixin
-from tests import mocks
-from tests.models import Stuff, RelatedStuff
+from tests.app.factories import StuffFactory, RelatedStuffFactory
+from tests.app.models import Stuff, RelatedStuff
+from tests.mocking.test_base import MockTestCase
 
 
 class TestUpdateTestCase(TestCase):
     def get_case(self, **kwargs):
-        class MockUpdateTestCase(UpdateAPITestCaseMixin, mocks.MockTestCase):
+        class MockUpdateTestCase(UpdateAPITestCaseMixin, MockTestCase):
             base_name = kwargs.pop('base_name', 'stuff')
-            factory_class = mocks.StuffFactory
+            factory_class = StuffFactory
             update_data = {'name': 'other things'}
 
         self.case_class = MockUpdateTestCase
@@ -18,10 +20,10 @@ class TestUpdateTestCase(TestCase):
         return MockUpdateTestCase(**kwargs)
 
     def get_related_case(self, **kwargs):
-        class MockUpdateTestCase(UpdateAPITestCaseMixin, mocks.MockTestCase):
+        class MockUpdateTestCase(UpdateAPITestCaseMixin, MockTestCase):
             base_name = 'relatedstuff'
-            factory_class = mocks.RelatedStuffFactory
-            other_thing = mocks.StuffFactory.create(name='other related thing')
+            factory_class = RelatedStuffFactory
+            other_thing = StuffFactory.create(name='other related thing')
             update_data = {'thing': other_thing.id}
             update_results = {'thing': str(other_thing.id)}
 
@@ -30,10 +32,10 @@ class TestUpdateTestCase(TestCase):
         return MockUpdateTestCase(**kwargs)
 
     def get_related_linked_case(self, **kwargs):
-        class MockUpdateTestCase(UpdateAPITestCaseMixin, mocks.MockTestCase):
+        class MockUpdateTestCase(UpdateAPITestCaseMixin, MockTestCase):
             base_name = 'relatedstuff-linked'
-            factory_class = mocks.RelatedStuffFactory
-            other_thing = mocks.StuffFactory.create(name='other related thing')
+            factory_class = RelatedStuffFactory
+            other_thing = StuffFactory.create(name='other related thing')
             related_url = reverse('stuff-linked-detail', (other_thing.id,))
             update_data = {'thing': related_url}
             update_results = {'thing': related_url}
@@ -46,13 +48,13 @@ class TestUpdateTestCase(TestCase):
         return MockUpdateTestCase(**kwargs)
 
     def get_many_related_case(self, **kwargs):
-        class MockUpdateTestCase(UpdateAPITestCaseMixin, mocks.MockTestCase):
+        class MockUpdateTestCase(UpdateAPITestCaseMixin, MockTestCase):
             base_name = kwargs.pop('base_name', 'manyrelatedstuff')
-            factory_class = mocks.ManyRelatedStuffFactory
+            factory_class = tests.app.factories.ManyRelatedStuffFactory
 
             def get_update_data(self):
-                other_thing = mocks.StuffFactory.create(name='other related thing')
-                another_thing = mocks.StuffFactory.create(name='another related thing')
+                other_thing = StuffFactory.create(name='other related thing')
+                another_thing = StuffFactory.create(name='another related thing')
                 return {'stuff': [other_thing.id, another_thing.id]}
 
         self.case_class = MockUpdateTestCase
