@@ -41,5 +41,4 @@ class ManyRelatedStuffHyperlinkedSerializer(serializers.HyperlinkedModelSerializ
         model = ManyRelatedStuff
         fields = ['stuff']
 
-    # stuff = serializers.HyperlinkedRelatedField(queryset=Stuff.objects.all(),
-    #                                             many=True)
+    # stuff = serializers.HyperlinkedRelatedField(queryset=Stuff.objects.all(), many=True)

@@ -6,6 +6,3 @@ class MockFactory(object):
     @classmethod
     def create(cls):
         return MockObject()
-
-
-

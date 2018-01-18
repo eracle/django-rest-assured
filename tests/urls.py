@@ -23,5 +23,3 @@ router.register(r'many-related-stuff-linked', RelatedStuffHyperlinkedViewSet,
                 base_name='manyrelatedstuff-linked')
 
 urlpatterns = router.urls
-print(urlpatterns)
-print('************************************************************************************************************************************************************************************************************************************')
